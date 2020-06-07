@@ -1,0 +1,17 @@
+version: "3"
+
+services:
+  user:
+    tty: true
+    build: ./docker
+    container_name: gateway-container
+    working_dir: /go/src/github.com/SND1231/portfolio_gateway
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./src:/go/src/github.com/SND1231/portfolio_gateway
+    networks:
+      - app_network
+networks:
+  app_network:
+    external: true
