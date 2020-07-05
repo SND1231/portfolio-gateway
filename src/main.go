@@ -16,8 +16,8 @@ import (
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/status"
 
-	post "github.com/SND1231/portfolio_gateway/proto/post"
-	user "github.com/SND1231/portfolio_gateway/proto/user"
+	post "github.com/SND1231/portfolio-gateway/proto/post"
+	user "github.com/SND1231/portfolio-gateway/proto/user"
 )
 
 func ClientIAuthnterceptor() grpc.UnaryClientInterceptor {
@@ -93,19 +93,19 @@ func CustomHTTPError(ctx context.Context, _ *runtime.ServeMux, marshaler runtime
 	w.WriteHeader(runtime.HTTPStatusFromCode(grpc.Code(err)))
 
 	st, _ := status.FromError(err)
-	var detail_list []map[string]interface{}
+	var detailList []map[string]interface{}
 	for _, detail := range st.Details() {
 		switch t := detail.(type) {
 		case *errdetails.BadRequest:
 			for _, violation := range t.GetFieldViolations() {
-				detail_list = append(detail_list,
+				detailList = append(detailList,
 					map[string]interface{}{"feild": violation.GetField(), "description": violation.GetDescription()})
 			}
 		}
 	}
 
-	err_body := map[string]interface{}{"error": grpc.ErrorDesc(err), "details": detail_list}
-	jErr := json.NewEncoder(w).Encode(err_body)
+	errBody := map[string]interface{}{"error": grpc.ErrorDesc(err), "details": detailList}
+	jErr := json.NewEncoder(w).Encode(errBody)
 
 	if jErr != nil {
 		w.Write([]byte(fallback))
