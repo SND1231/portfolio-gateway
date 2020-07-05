@@ -1,4 +1,4 @@
-module github.com/SND1231/portfolio_gateway
+module github.com/SND1231/portfolio-gateway
 
 go 1.13
 
