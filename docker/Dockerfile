@@ -5,6 +5,7 @@ ENV GO111MODULE=on
 WORKDIR /go/src/github.com/SND1231/portfolio-gateway
 
 COPY ./src .
+
 RUN apk update \
  && apk add vim curl git \
  && go get -u github.com/dgrijalva/jwt-go \
@@ -16,3 +17,8 @@ RUN apk update \
  && go get -u golang.org/x/net \
  && go get -u google.golang.org/appengine \
  && go get -u google.golang.org/grpc
+
+RUN git clone https://github.com/SND1231/proto-files.git \
+ && mkdir proto \
+ && cp -pr ./proto-files/user/* /go/src/github.com/SND1231/portfolio-gateway/proto \
+ && cp -pr ./proto-files/post/* /go/src/github.com/SND1231/portfolio-gateway/proto

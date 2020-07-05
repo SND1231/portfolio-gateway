@@ -11,7 +11,9 @@ services:
     ports:
       - "8081:8081"
     volumes:
-      - ./src:/go/src/github.com/SND1231/portfolio-gateway
+      - ./src/go.mod:/go/src/github.com/SND1231/portfolio-gateway/go.mod
+      - ./src/go.sum:/go/src/github.com/SND1231/portfolio-gateway/go.sum
+      - ./src/main.go:/go/src/github.com/SND1231/portfolio-gateway/main.go
     networks:
       - app_network
 networks:
