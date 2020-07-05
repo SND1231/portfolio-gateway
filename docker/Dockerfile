@@ -20,5 +20,4 @@ RUN apk update \
 
 RUN git clone https://github.com/SND1231/proto-files.git \
  && mkdir proto \
- && cp -pr ./proto-files/user/* /go/src/github.com/SND1231/portfolio-gateway/proto \
- && cp -pr ./proto-files/post/* /go/src/github.com/SND1231/portfolio-gateway/proto
+ && cp -pr ./proto-files/* /go/src/github.com/SND1231/portfolio-gateway/proto
