@@ -7,7 +7,7 @@ jobs:
       - checkout
       - run:
           name: Build
-          command: docker-compose build --build-arg SECRET_KEY=$SECRET_KEY
+          command: docker-compose build --build-arg SECRET_KEY=$SECRET_KEY gateway
       - run:
           name: Tag to latest
           command: docker tag project_gateway:latest ${DOCKER_USER}/app-gateway:latest
