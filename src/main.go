@@ -8,6 +8,7 @@ import (
 	"github.com/gorilla/handlers"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"google.golang.org/genproto/googleapis/rpc/errdetails"
@@ -70,7 +71,8 @@ func AuthToken(authorization string) bool {
 			return nil, errors.New("alg error")
 		}
 		//keyを返す
-		return []byte("secret"), nil
+		secret := os.Getenv("SECRET_KEY")
+		return []byte(secret), nil
 	})
 
 	if err != nil {
