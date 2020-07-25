@@ -1,0 +1,16 @@
+apiVersion: skaffold/v1
+kind: Config
+build:
+  artifacts:
+  - image: snd1231/app-gateway
+    context: .
+    docker:
+      dockerfile: ./docker/Dockerfile
+  local:
+    push: true
+
+deploy:
+  kubectl:
+    manifests:
+      - gateway-deployment.yaml
+
