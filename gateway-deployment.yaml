@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-deployment
+  labels:
+    app: ap
+    back: gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ap
+      back: gateway
+  template:
+    metadata:
+      labels:
+        app: ap
+        back: gateway
+    spec:
+      containers:
+      - name: gateway
+        image: snd1231/app-gateway
+        ports:
+        - containerPort: 8081
+        command:
+          - sh
+          - -c
+          - go run main.go

@@ -2,6 +2,9 @@ FROM golang:alpine
 
 ENV GO111MODULE=on
 
+ARG SECRET_KEY
+ENV SECRET_KEY $SECRET_KEY
+
 WORKDIR /go/src/github.com/SND1231/portfolio-gateway
 
 COPY ./src .
