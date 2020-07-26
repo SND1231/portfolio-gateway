@@ -15,6 +15,7 @@ jobs:
             set -x; \
             apk add --no-cache --virtual .fetch-deps curl git python py-pip less groff
       - run:
+
           name: install kubectl
           command: |
             curl -LO https://storage.googleapis.com/kubernetes-release/release/v1.15.0/bin/linux/amd64/kubectl && \
@@ -33,7 +34,6 @@ jobs:
       - run:
           name: setup kubeconfig
           command: aws eks update-kubeconfig --name $CLUSTER_NAME
-
       - run:
           name: Docker Login
           command: docker login -u ${DOCKER_USER} -p ${DOCKER_PASS}
